@@ -41,9 +41,11 @@ namespace VoiceTexterBot
             }
             if (update.Type == UpdateType.Message)
             {
+                Console.WriteLine($"Получено сообщение {update.Message.Text}");
                 await
                     _telegramClient.SendTextMessageAsync(update.Message.Chat.Id,
-                    "Вы отправили сообщение", cancellationToken: cancellationToken);
+                    $"Вы отправили сообщение {update.Message.Text}",
+                    cancellationToken: cancellationToken);
                 return;
             }
         }
