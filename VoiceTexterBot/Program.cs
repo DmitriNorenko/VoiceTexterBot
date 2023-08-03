@@ -1,10 +1,32 @@
-﻿namespace VoiceTexterBot
+﻿using System;
+using System.Text;
+using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Telegram.Bot;
+
+namespace VoiceTexterBot
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            
+            Console.OutputEncoding = Encoding.Unicode;
+            var host = new HostBuilder().
+               ConfigureServices((hostContext, services) =>
+               ConfigureServices(services)).UseConsoleLifetime().Build();
+
+            Console.WriteLine("Сервис запущен");
+
+            await host.RunAsync();
+
+            Console.WriteLine("Сервис остановлен");
+        }
+        static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<ITelegramBotClient>(provider =>
+            new TelegramBotClient("BOT_TOKEN"));
+            services.AddHostedService<Bot>();
         }
     }
 }
