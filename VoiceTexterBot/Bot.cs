@@ -27,6 +27,7 @@ namespace VoiceTexterBot
                 HandleErrorAsync,
                 new ReceiverOptions() { AllowedUpdates = { } },
                 cancellationToken: stoppingToken);
+            Console.WriteLine("Бот запущен");
         }
         async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
             CancellationToken cancellationToken)
