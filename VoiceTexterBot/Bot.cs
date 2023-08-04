@@ -10,15 +10,30 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
+using VoiceTexterBot.Controllers;
 
 namespace VoiceTexterBot
 {
     internal class Bot : BackgroundService
     {
         private ITelegramBotClient _telegramClient;
-        public Bot(ITelegramBotClient telegramClient)
+        private InlineKeyboardController _inlineKeyboardController;
+        private TextMessageController _textMessageController;
+        private VoiceMessageController _voiceMessageController;
+        private DefaultMessageController _defaultMessageController;
+        public Bot(
+            ITelegramBotClient telegramClient,
+            InlineKeyboardController inlineKeyboardController,
+            TextMessageController textMessageController,
+            VoiceMessageController voiceMessageController,
+            DefaultMessageController defaultMessageController)
         {
             _telegramClient = telegramClient;
+            _textMessageController = textMessageController;
+            _voiceMessageController = voiceMessageController;
+            _defaultMessageController = defaultMessageController;
+            _inlineKeyboardController = inlineKeyboardController;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
