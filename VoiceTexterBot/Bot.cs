@@ -50,18 +50,26 @@ namespace VoiceTexterBot
             if (update.Type == UpdateType.CallbackQuery)
             {
                 await
-                    _telegramClient.SendTextMessageAsync(update.Message.Chat.Id, "Вы нажали кнопку",
-                    cancellationToken: cancellationToken);
+                  _inlineKeyboardController.Handle(update.CallbackQuery, cancellationToken);
                 return;
             }
             if (update.Type == UpdateType.Message)
             {
-                Console.WriteLine($"Получено сообщение: {update.Message.Text}");
-                await
-                    _telegramClient.SendTextMessageAsync(update.Message.Chat.Id,
-                    $"Вы отправили сообщение: {update.Message.Text}",
-                    cancellationToken: cancellationToken);
-                return;
+                switch (update.Message!.Type)
+                {
+                    case MessageType.Voice:
+                        await
+                            _voiceMessageController.Handle(update.Message, cancellationToken);
+                        return;
+                    case MessageType.Text:
+                        await
+                            _textMessageController.Handle(update.Message, cancellationToken);
+                        return;
+                    default:
+                        await
+                            _defaultMessageController.Handle(update.Message, cancellationToken);
+                        return;
+                }
             }
         }
         Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception,
