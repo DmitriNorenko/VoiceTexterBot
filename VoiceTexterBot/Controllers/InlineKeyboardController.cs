@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace VoiceTexterBot.Controllers
 {
-    internal class InlineKeyboardController
+    public class InlineKeyboardController
     {
         private readonly ITelegramBotClient _telegramClient;
 
