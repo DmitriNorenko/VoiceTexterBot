@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using VoiceTexterBot.Controllers;
+using VoiceTexterBot;
 
 namespace VoiceTexterBot
 {
