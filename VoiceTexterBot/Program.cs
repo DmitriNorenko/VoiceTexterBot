@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
+using VoiceTexterBot.Configuration;
 using VoiceTexterBot.Controllers;
 using VoiceTexterBot.Services;
 
@@ -27,6 +28,9 @@ namespace VoiceTexterBot
         }
         static void ConfigureServices(IServiceCollection services)
         {
+            AppSettings appSettings = BuildAppSettings();
+            services.AddSingleton(BuildAppSettings());
+
             services.AddTransient<DefaultMessageController>();
             services.AddTransient<VoiceMessageController>();
             services.AddTransient<TextMessageController>();
@@ -35,8 +39,16 @@ namespace VoiceTexterBot
             services.AddSingleton<IStorage, MemoryStorage>();
 
             services.AddSingleton<ITelegramBotClient>(provider =>
-            new TelegramBotClient("6669545490:AAHl6TbKqjgYXXagHiJPCBrSHG2R_3KyXpQ"));
+            new TelegramBotClient(appSettings.BotToken));
             services.AddHostedService<Bot>();
+        }
+
+        static AppSettings BuildAppSettings()
+        {
+            return new AppSettings()
+            {
+                BotToken = "6669545490:AAHl6TbKqjgYXXagHiJPCBrSHG2R_3KyXpQ"
+            };
         }
     }
 }
