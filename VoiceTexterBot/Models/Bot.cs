@@ -13,7 +13,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using VoiceTexterBot.Controllers;
 
-namespace VoiceTexterBot
+namespace VoiceTexterBot.Models
 {
     internal class Bot : BackgroundService
     {

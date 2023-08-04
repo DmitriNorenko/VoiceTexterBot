@@ -7,8 +7,9 @@ using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using VoiceTexterBot.Controllers;
 using VoiceTexterBot;
+using VoiceTexterBot.Services;
 
-namespace VoiceTexterBot
+namespace VoiceTexterBot.Models
 {
     internal class Program
     {
@@ -31,6 +32,8 @@ namespace VoiceTexterBot
             services.AddTransient<VoiceMessageController>();
             services.AddTransient<TextMessageController>();
             services.AddTransient<InlineKeyboardController>();
+
+            services.AddSingleton<IStorage,MemoryStorage>();
 
             services.AddSingleton<ITelegramBotClient>(provider =>
             new TelegramBotClient("6669545490:AAHl6TbKqjgYXXagHiJPCBrSHG2R_3KyXpQ"));
