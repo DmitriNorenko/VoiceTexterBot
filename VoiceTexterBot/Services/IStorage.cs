@@ -7,7 +7,7 @@ using VoiceTexterBot.Models;
 
 namespace VoiceTexterBot.Services
 {
-     interface IStorage
+    public interface IStorage
     {
         Session GetSession(long chatId);
     }
