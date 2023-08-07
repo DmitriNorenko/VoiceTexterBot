@@ -38,6 +38,8 @@ namespace VoiceTexterBot
 
             services.AddSingleton<IStorage, MemoryStorage>();
 
+            services.AddSingleton<IFileHandler,AudioFileHandler>();
+
             services.AddSingleton<ITelegramBotClient>(provider =>
             new TelegramBotClient(appSettings.BotToken));
             services.AddHostedService<Bot>();
