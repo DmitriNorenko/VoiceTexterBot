@@ -12,7 +12,7 @@ namespace VoiceTexterBot.Configuration
 
         public string DownloadsFolder { get; set; }
 
-        public string AudoiFileName { get; set; }  
+        public string AudioFileName { get; set; }  
 
         public string InputAudioFormat { get; set; }
 

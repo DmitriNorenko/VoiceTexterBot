@@ -14,13 +14,13 @@ namespace VoiceTexterBot.Controllers
 {
     public class VoiceMessageController
     {
-        private readonly MemoryStorage _memoryStorage;
+        private readonly IStorage _memoryStorage;
         private readonly AppSettings _appSettings;
         private readonly ITelegramBotClient _telegramClient;
         private readonly IFileHandler _audioFileHandler;
 
         public VoiceMessageController(ITelegramBotClient telegramBotClient,
-            AppSettings appSettings, IFileHandler audioFileHandler, MemoryStorage memoryStorage)
+            AppSettings appSettings, IFileHandler audioFileHandler, IStorage memoryStorage)
         {
             _appSettings = appSettings;
             _audioFileHandler = audioFileHandler;

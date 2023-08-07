@@ -23,7 +23,7 @@ namespace VoiceTexterBot.Services
         public async Task Download(string fileId, CancellationToken ct)
         {
             string inputAudioFilePath = Path.Combine(_appSettings.DownloadsFolder,
-                $"{_appSettings.AudoiFileName}.{_appSettings.InputAudioFormat}");
+                $"{_appSettings.AudioFileName}.{_appSettings.InputAudioFormat}");
 
             using (FileStream destinationStream = File.Create(inputAudioFilePath))
             {
@@ -39,12 +39,12 @@ namespace VoiceTexterBot.Services
         public string Process(string inputParam)
         {
             string inputAudioPath = Path.Combine(_appSettings.DownloadsFolder,
-                $"{_appSettings.AudoiFileName}.{_appSettings.InputAudioFormat}");
+                $"{_appSettings.AudioFileName}.{_appSettings.InputAudioFormat}");
             string outputAudioPath = Path.Combine(_appSettings.DownloadsFolder,
-                 $"{_appSettings.AudoiFileName}.{_appSettings.InputAudioFormat}");
+                 $"{_appSettings.AudioFileName}.{_appSettings.InputAudioFormat}");
 
             Console.WriteLine("Начинаем конвертацию...");
-            AudioConverter.TryConverter(inputAudioPath, outputAudioPath);
+            AudioConverter.TryConvert(inputAudioPath, outputAudioPath);
             Console.WriteLine("Файл конвертирован.");
 
             return "Конвертация успешно завершена.";

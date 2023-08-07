@@ -38,7 +38,7 @@ namespace VoiceTexterBot
 
             services.AddSingleton<IStorage, MemoryStorage>();
 
-            services.AddSingleton<IFileHandler,AudioFileHandler>();
+            services.AddSingleton<IFileHandler, AudioFileHandler>();
 
             services.AddSingleton<ITelegramBotClient>(provider =>
             new TelegramBotClient(appSettings.BotToken));
@@ -52,7 +52,7 @@ namespace VoiceTexterBot
                 DownloadsFolder = "C:\\Users\\dima\\Downloads",
                 BotToken = "6669545490:AAHl6TbKqjgYXXagHiJPCBrSHG2R_3KyXpQ",
 
-                AudoiFileName = "audio",
+                AudioFileName = "audio",
                 InputAudioFormat = "ogg",
                 OutputAudioFormat = "wav"
             };
