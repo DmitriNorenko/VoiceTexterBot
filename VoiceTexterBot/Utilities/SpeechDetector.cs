@@ -11,15 +11,14 @@ namespace VoiceTexterBot.Utilities
 {
     public static class SpeechDetector
     {
-        public static string DetectSpeech(string audioPath, float inputBitrate,
-            string languageCode)
+        public static string DetectSpeech(string audioPath, float inputBitrate, string languageCode)
         {
             Vosk.Vosk.SetLogLevel(0);
-            var modelPath = Path.Combine(DirectoryExtension.GetSolutionRoot(),
-                "Speech-models", $"vosk-model-small-{languageCode.ToLower()}");
+            var modelPath = Path.Combine(DirectoryExtension.GetSolutionRoot(), "Speech-models", $"vosk-model-small-{languageCode.ToLower()}");
             Model model = new(modelPath);
             return GetWords(model, audioPath, inputBitrate);
         }
+
         private static string GetWords(Model model, string audioPath, float inputBitrate)
         {
             VoskRecognizer rec = new(model, inputBitrate);
@@ -38,19 +37,18 @@ namespace VoiceTexterBot.Utilities
                     if (rec.AcceptWaveform(buffer, bytesRead))
                     {
                         var sentenceJson = rec.Result();
-                        var sentenceObj = JObject.Parse(sentenceJson);
+                        JObject sentenceObj = JObject.Parse(sentenceJson);
                         string sentence = (string)sentenceObj["text"];
-
-                        textBuffer.Append(StringExtension.UppercaseFirst(sentence) + ".");
+                        textBuffer.Append(StringExtension.UppercaseFirst(sentence) + ". ");
                     }
                 }
             }
+
             var finalSentence = rec.FinalResult();
             JObject finalSentenceObj = JObject.Parse(finalSentence);
 
             textBuffer.Append((string)finalSentenceObj["text"]);
-
-            return finalSentence.ToString();
+            return textBuffer.ToString();
         }
     }
 }

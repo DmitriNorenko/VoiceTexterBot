@@ -34,16 +34,12 @@ namespace VoiceTexterBot.Controllers
 
             await _audioFileHandler.Download(fileId, ct);
 
-            await
-                _telegramClient.SendTextMessageAsync(message.Chat.Id,
-                "Голосовое сообщение загружено", cancellationToken: ct);
-
             string userLanguageCode = _memoryStorage.GetSession(message.Chat.Id).LanguageCode;
 
-            _audioFileHandler.Process(userLanguageCode);
+            var result = _audioFileHandler.Process(userLanguageCode);
             await
                 _telegramClient.SendTextMessageAsync(message.Chat.Id,
-                "Голосовое сообщение конвертировано в формат .WAV", cancellationToken: ct);
+                result, cancellationToken: ct);
         }
     }
 }
