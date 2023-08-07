@@ -30,16 +30,14 @@ namespace VoiceTexterBot.Controllers
         public async Task Handle(Message message, CancellationToken ct)
         {
             var fileId = message.Voice?.FileId;
-            if (fileId == null) return;
+            if (fileId == null)
+                return;
 
             await _audioFileHandler.Download(fileId, ct);
 
-            string userLanguageCode = _memoryStorage.GetSession(message.Chat.Id).LanguageCode;
-
-            var result = _audioFileHandler.Process(userLanguageCode);
-            await
-                _telegramClient.SendTextMessageAsync(message.Chat.Id,
-                result, cancellationToken: ct);
+            string userLanguageCode = _memoryStorage.GetSession(message.Chat.Id).LanguageCode; // Здесь получим язык из сессии пользователя
+            var result = _audioFileHandler.Process(userLanguageCode); // Запустим обработку
+            await _telegramClient.SendTextMessageAsync(message.Chat.Id, result, cancellationToken: ct);
         }
     }
 }
