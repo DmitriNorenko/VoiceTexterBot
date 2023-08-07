@@ -8,7 +8,7 @@ using VoiceTexterBot.Configuration;
 
 namespace VoiceTexterBot.Services
 {
-    internal class AudioFileHandler : IFileHandler
+    public class AudioFileHandler : IFileHandler
     {
         private readonly AppSettings _appSettings;
         private readonly ITelegramBotClient _telegramBotClient;
