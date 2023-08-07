@@ -15,5 +15,7 @@ namespace VoiceTexterBot.Configuration
         public string AudoiFileName { get; set; }  
 
         public string InputAudioFormat { get; set; }
+
+        public string OutputAudioFormat { get; set; }
     }
 }
