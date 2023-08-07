@@ -36,7 +36,7 @@ namespace VoiceTexterBot.Services
                     destinationStream, ct);
             }
         }
-        public string Process(string LenguageCode)
+        public string Process(string languageCode)
         {
             string inputAudioPath = Path.Combine(_appSettings.DownloadsFolder,
                 $"{_appSettings.AudioFileName}.{_appSettings.InputAudioFormat}");
@@ -47,7 +47,12 @@ namespace VoiceTexterBot.Services
             AudioConverter.TryConvert(inputAudioPath, outputAudioPath);
             Console.WriteLine("Файл конвертирован.");
 
-            return "Конвертация успешно завершена.";
+            Console.WriteLine("Начинаем распознавание...");
+            var speechText = SpeechDetector.DetectSpeech(outputAudioPath,
+                _appSettings.InputAudioBitrate, languageCode);
+            Console.WriteLine("Файл распознан.");
+
+            return speechText;
         }
     }
 }
