@@ -47,7 +47,7 @@ namespace VoiceTexterBot
         {
             return new AppSettings()
             {
-                DownloadsFolder = "C:\\Users\\evmor\\Downloads",
+                DownloadsFolder = "C:\\Users\\dima\\Downloads",
                 BotToken = "6669545490:AAHl6TbKqjgYXXagHiJPCBrSHG2R_3KyXpQ",
 
                 AudoiFileName = "audio",
